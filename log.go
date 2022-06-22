@@ -37,12 +37,18 @@ var cacheSize = 10000
 var cache = []string{}
 
 func buildCache(length int) {
+	cache = make([]string, cacheSize)
+	var b strings.Builder
+	b.Grow(length)
+
 	for i := 0; i < cacheSize; i++ {
-		msg := gofakeit.Word()
-		for len(msg) <= length {
-			msg = msg + " " + gofakeit.Word()
+
+		for b.Len() <= length {
+			b.WriteString(gofakeit.Word())
+			b.WriteString(" ")
 		}
-		cache = append(cache, msg[:length-1])
+		cache[i] = b.String()
+		b.Reset()
 	}
 }
 
