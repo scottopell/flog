@@ -174,6 +174,6 @@ func NewSplitFileName(path string, count int) string {
 }
 
 func writeSeq(counter uint64, log string) string {
-	seq := fmt.Sprintf(" log_seq:%d:%d", id, counter)
+	seq := fmt.Sprintf(" log_seq:%d:%d:log_seq", id, counter)
 	return log[:len(log)-len(seq)] + seq
 }
