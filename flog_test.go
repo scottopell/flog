@@ -1,4 +1,4 @@
-package main
+package flog
 
 // func ExampleNewLog() {
 // 	rand.Seed(11)
