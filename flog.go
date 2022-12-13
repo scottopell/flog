@@ -14,6 +14,26 @@ import (
 
 var id = time.Now().UnixNano()
 
+func GenerateInfiniteLogs() chan string {
+	logLength := 1024
+	created := time.Now()
+	chosenFormat := "app_log"
+	buildCache(logLength)
+
+	rand.Seed(time.Now().UnixNano())
+	logChan := make(chan string, 0)
+	go func() {
+		for {
+			log := NewLog(chosenFormat, created, logLength)
+
+			logChan <- log + "\n"
+
+			created = created.Add(1)
+		}
+	}()
+	return logChan
+}
+
 // Generate generates the logs with given options
 func Generate(option *Option) error {
 	var (
